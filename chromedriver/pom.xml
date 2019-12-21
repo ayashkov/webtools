@@ -10,10 +10,9 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webtools-chromium</artifactId>
+    <artifactId>webtools-chromedriver</artifactId>
     <packaging>pom</packaging>
-    <name>Google Chromium Package</name>
-
+    <name>Google Chrome Driver Package</name>
     <properties>
         <chromium.version>79.0.3945.88</chromium.version>
         <chromium.position>706915</chromium.position>
@@ -33,10 +32,10 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>${chromium.source.url}/Linux_x64%2F${chromium.position}%2Fchrome-linux.zip?alt=media</url>
+                            <url>${chromium.source.url}/Linux_x64%2F${chromium.position}%2Fchromedriver_linux64.zip?alt=media</url>
                             <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFileName>chrome-linux.zip</outputFileName>
+                            <outputFileName>chromedriver_linux64.zip</outputFileName>
                         </configuration>
                     </execution>
                     <execution>
@@ -46,10 +45,10 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>${chromium.source.url}/Mac%2F${chromium.position}%2Fchrome-mac.zip?alt=media</url>
+                            <url>${chromium.source.url}/Mac%2F${chromium.position}%2Fchromedriver_mac64.zip?alt=media</url>
                             <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFileName>chrome-mac.zip</outputFileName>
+                            <outputFileName>chromedriver_mac64.zip</outputFileName>
                         </configuration>
                     </execution>
                     <execution>
@@ -59,10 +58,10 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>${chromium.source.url}/Win_x64%2F${chromium.position}%2Fchrome-win.zip?alt=media</url>
+                            <url>${chromium.source.url}/Win_x64%2F${chromium.position}%2Fchromedriver_win32.zip?alt=media</url>
                             <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFileName>chrome-win.zip</outputFileName>
+                            <outputFileName>chromedriver_win32.zip</outputFileName>
                         </configuration>
                     </execution>
                 </executions>
