@@ -11,5 +11,83 @@
     </parent>
 
     <artifactId>webtools-chromium</artifactId>
+    <packaging>pom</packaging>
     <name>Google Chromium Package</name>
+
+    <properties>
+        <chromium.version>79.0.3945.88</chromium.version>
+        <chromium.position>706915</chromium.position>
+        <chromium.source.url>https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o</chromium.source.url>
+        <chromium.win.url>https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Win_x64%2F706915%2Fchrome-win.zip?alt=media</chromium.win.url>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>get-linux</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromium.source.url}/Linux_x64%2F${chromium.position}%2Fchrome-linux.zip?alt=media</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <outputFileName>chrome-linux.zip</outputFileName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>get-macos</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromium.source.url}/Mac%2F${chromium.position}%2Fchrome-mac.zip?alt=media</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <outputFileName>chrome-mac.zip</outputFileName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>get-windows</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromium.source.url}/Win_x64%2F${chromium.position}%2Fchrome-win.zip?alt=media</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <outputFileName>chrome-win.zip</outputFileName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/linux.xml</descriptor>
+                        <descriptor>src/assembly/macos.xml</descriptor>
+                        <descriptor>src/assembly/windows.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

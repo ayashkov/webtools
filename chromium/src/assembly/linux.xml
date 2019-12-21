@@ -1,0 +1,51 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+
+    <id>linux</id>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}/chrome-linux</directory>
+            <outputDirectory></outputDirectory>
+            <fileMode>0444</fileMode>
+            <directoryMode>0755</directoryMode>
+            <excludes>
+                <exclude>chrome</exclude>
+                <exclude>chrome-wrapper</exclude>
+                <exclude>chrome_sandbox</exclude>
+                <exclude>crashpad_handler</exclude>
+                <exclude>nacl_helper</exclude>
+                <exclude>nacl_helper_bootstrap</exclude>
+                <exclude>nacl_helper_nonsfi</exclude>
+                <exclude>nacl_irt_x86_64.nexe</exclude>
+                <exclude>xdg-mime</exclude>
+                <exclude>xdg-settings</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/chrome-linux</directory>
+            <outputDirectory></outputDirectory>
+            <fileMode>0555</fileMode>
+            <directoryMode>0755</directoryMode>
+            <includes>
+                <include>chrome</include>
+                <include>chrome-wrapper</include>
+                <include>chrome_sandbox</include>
+                <include>crashpad_handler</include>
+                <include>nacl_helper</include>
+                <include>nacl_helper_bootstrap</include>
+                <include>nacl_helper_nonsfi</include>
+                <include>nacl_irt_x86_64.nexe</include>
+                <include>xdg-mime</include>
+                <include>xdg-settings</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
