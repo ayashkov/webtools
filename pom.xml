@@ -33,6 +33,7 @@
     <modules>
         <module>chromedriver</module>
         <module>chromium</module>
+        <module>nodejs</module>
     </modules>
 
     <build>
