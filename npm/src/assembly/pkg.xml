@@ -1,0 +1,72 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+
+    <id>pkg</id>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}/package</directory>
+            <outputDirectory>node_modules/npm</outputDirectory>
+            <fileMode>0444</fileMode>
+            <directoryMode>0755</directoryMode>
+            <excludes>
+                <exclude>bin/node-gyp-bin/node-gyp</exclude>
+                <exclude>bin/npm-cli.js</exclude>
+                <exclude>bin/npm</exclude>
+                <exclude>bin/npx</exclude>
+                <exclude>bin/npx-cli.js</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/package</directory>
+            <outputDirectory>node_modules/npm</outputDirectory>
+            <fileMode>0555</fileMode>
+            <directoryMode>0755</directoryMode>
+            <includes>
+                <include>bin/node-gyp-bin/node-gyp</include>
+                <include>bin/npm-cli.js</include>
+                <include>bin/npm</include>
+                <include>bin/npx</include>
+                <include>bin/npx-cli.js</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <files>
+        <file>
+            <source>${project.build.scriptSourceDirectory}/npm.sh</source>
+            <outputDirectory></outputDirectory>
+            <destName>npm</destName>
+            <fileMode>0555</fileMode>
+            <lineEnding>unix</lineEnding>
+        </file>
+        <file>
+            <source>${project.build.scriptSourceDirectory}/npx.sh</source>
+            <outputDirectory></outputDirectory>
+            <destName>npx</destName>
+            <fileMode>0555</fileMode>
+            <lineEnding>unix</lineEnding>
+        </file>
+        <file>
+            <source>${project.build.directory}/package/bin/npm.cmd</source>
+            <outputDirectory></outputDirectory>
+            <destName>npm.cmd</destName>
+            <fileMode>0444</fileMode>
+            <lineEnding>windows</lineEnding>
+        </file>
+        <file>
+            <source>${project.build.directory}/package/bin/npx.cmd</source>
+            <outputDirectory></outputDirectory>
+            <destName>npx.cmd</destName>
+            <fileMode>0444</fileMode>
+            <lineEnding>windows</lineEnding>
+        </file>
+    </files>
+</assembly>
