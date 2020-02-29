@@ -16,44 +16,48 @@
 
     <properties>
         <npm.version>6.13.4</npm.version>
-        <npm.source.url>https://registry.npmjs.org/-</npm.source.url>
+        <npm.source.url>https://registry.npmjs.org/npm/-</npm.source.url>
     </properties>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>get</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>wget</goal>
+                            <goal>download-single</goal>
                         </goals>
                         <configuration>
-                            <url>${npm.source.url}/npm-${npm.version}.tgz</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <url>${npm.source.url}</url>
+                            <fromFile>npm-${npm.version}.tgz</fromFile>
+                            <toDir>${project.build.directory}</toDir>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/assembly/pkg.xml</descriptor>
-                    </descriptors>
-                </configuration>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>package</id>
-                        <phase>package</phase>
+                        <id>unpack</id>
                         <goals>
-                            <goal>single</goal>
+                            <goal>copy</goal>
                         </goals>
+                        <configuration>
+                            <fileset>
+                                <directory>${project.build.directory}/npm-${npm.version}.tgz</directory>
+                                <outputDirectory>${project.build.directory}</outputDirectory>
+                                <includes>
+                                    <include>**/*</include>
+                                </includes>
+                            </fileset>
+                            <verbose>true</verbose>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
