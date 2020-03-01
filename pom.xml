@@ -11,8 +11,13 @@
 
     <licenses>
         <license>
-            <name>BSD 2-Clause License</name>
-            <url>https://github.com/ayashkov/webtools/blob/master/LICENSE.txt</url>
+            <name>MIT License</name>
+            <url>https://raw.githubusercontent.com/ayashkov/webtools/master/LICENSE</url>
+            <comments>
+                This license applies only to the packaging intructions.
+                The software distributions being packaged are covered by
+                their own respective licenses.
+            </comments>
         </license>
     </licenses>
 
