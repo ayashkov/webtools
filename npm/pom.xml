@@ -22,41 +22,41 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>get</id>
+                        <id>download</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>download-single</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
-                            <url>${npm.source.url}</url>
-                            <fromFile>npm-${npm.version}.tgz</fromFile>
-                            <toDir>${project.build.directory}</toDir>
+                            <target>
+                                <untar dest="${project.build.directory}"
+                                    compression="gzip">
+                                    <url url="${npm.source.url}/npm-${npm.version}.tgz" />
+                                </untar>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/pkg.xml</descriptor>
+                    </descriptors>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>unpack</id>
+                        <id>package</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>copy</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <fileset>
-                                <directory>${project.build.directory}/npm-${npm.version}.tgz</directory>
-                                <outputDirectory>${project.build.directory}</outputDirectory>
-                                <includes>
-                                    <include>**/*</include>
-                                </includes>
-                            </fileset>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
