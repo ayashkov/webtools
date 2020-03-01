@@ -56,7 +56,6 @@
                                     <include>**/*</include>
                                 </includes>
                             </fileset>
-                            <verbose>true</verbose>
                         </configuration>
                     </execution>
                 </executions>

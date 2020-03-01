@@ -15,71 +15,99 @@
     <name>Node.js Package</name>
 
     <properties>
-        <nodejs.version>12.14.0</nodejs.version>
+        <nodejs.version>12.16.1</nodejs.version>
         <nodejs.source.url>https://nodejs.org/dist</nodejs.source.url>
     </properties>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>get-linux</id>
-                        <phase>generate-resources</phase>
+                        <id>repack</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>wget</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
-                            <url>${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-linux-x64.tar.gz</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>get-macos</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-darwin-x64.tar.gz</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>get-windows</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-win-x64.zip</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <target>
+                                <copy todir="${project.build.directory}/linux">
+                                    <mappedresources>
+                                        <tarfileset includes="**/node">
+                                            <gzipresource>
+                                                <url url="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-linux-x64.tar.gz" />
+                                            </gzipresource>
+                                        </tarfileset>
+                                        <flattenmapper />
+                                    </mappedresources>
+                                </copy>
+                                <zip destfile="${project.build.directory}/linux.zip">
+                                    <zipfileset filemode="555"
+                                        dir="${project.build.directory}/linux" />
+                                </zip>
+                                <copy todir="${project.build.directory}/macos">
+                                    <mappedresources>
+                                        <tarfileset includes="**/node">
+                                            <gzipresource>
+                                                <url url="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-darwin-x64.tar.gz" />
+                                            </gzipresource>
+                                        </tarfileset>
+                                        <flattenmapper />
+                                    </mappedresources>
+                                </copy>
+                                <zip destfile="${project.build.directory}/macos.zip">
+                                    <zipfileset filemode="555"
+                                        dir="${project.build.directory}/macos" />
+                                </zip>
+                                <get src="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-win-x64.zip"
+                                    dest="${project.build.directory}/win-x64.zip" />
+                                <unzip src="${project.build.directory}/win-x64.zip"
+                                    dest="${project.build.directory}/windows">
+                                    <patternset>
+                                        <include name="**/node.exe"/>
+                                    </patternset>
+                                    <flattenmapper />
+                                </unzip>
+                                <zip destfile="${project.build.directory}/windows.zip">
+                                    <zipfileset dir="${project.build.directory}/windows"
+                                        filemode="444" />
+                                </zip>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/assembly/linux.xml</descriptor>
-                        <descriptor>src/assembly/macos.xml</descriptor>
-                        <descriptor>src/assembly/windows.xml</descriptor>
-                    </descriptors>
-                </configuration>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>package</id>
+                        <id>attach-artifacts</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>attach-artifact</goal>
                         </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/linux.zip</file>
+                                    <type>zip</type>
+                                    <classifier>linux</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/macos.zip</file>
+                                    <type>zip</type>
+                                    <classifier>macos</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/windows.zip</file>
+                                    <type>zip</type>
+                                    <classifier>windows</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
