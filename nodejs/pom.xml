@@ -26,88 +26,60 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>repack</id>
-                        <phase>package</phase>
+                        <id>download</id>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
                             <target>
-                                <copy todir="${project.build.directory}/linux">
-                                    <mappedresources>
-                                        <tarfileset includes="**/node">
-                                            <gzipresource>
-                                                <url url="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-linux-x64.tar.gz" />
-                                            </gzipresource>
-                                        </tarfileset>
-                                        <flattenmapper />
-                                    </mappedresources>
-                                </copy>
-                                <zip destfile="${project.build.directory}/linux.zip">
-                                    <zipfileset filemode="555"
-                                        dir="${project.build.directory}/linux" />
-                                </zip>
-                                <copy todir="${project.build.directory}/macos">
-                                    <mappedresources>
-                                        <tarfileset includes="**/node">
-                                            <gzipresource>
-                                                <url url="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-darwin-x64.tar.gz" />
-                                            </gzipresource>
-                                        </tarfileset>
-                                        <flattenmapper />
-                                    </mappedresources>
-                                </copy>
-                                <zip destfile="${project.build.directory}/macos.zip">
-                                    <zipfileset filemode="555"
-                                        dir="${project.build.directory}/macos" />
-                                </zip>
+                                <untar dest="${project.build.directory}/linux"
+                                    compression="gzip">
+                                    <url url="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-linux-x64.tar.gz" />
+                                    <patternset>
+                                        <include name="*/bin/node" />
+                                    </patternset>
+                                    <flattenmapper />
+                                </untar>
+                                <untar dest="${project.build.directory}/macos"
+                                    compression="gzip">
+                                    <url url="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-darwin-x64.tar.gz" />
+                                    <patternset>
+                                        <include name="*/bin/node" />
+                                    </patternset>
+                                    <flattenmapper />
+                                </untar>
                                 <get src="${nodejs.source.url}/v${nodejs.version}/node-v${nodejs.version}-win-x64.zip"
                                     dest="${project.build.directory}/win-x64.zip" />
                                 <unzip src="${project.build.directory}/win-x64.zip"
                                     dest="${project.build.directory}/windows">
                                     <patternset>
-                                        <include name="**/node.exe"/>
+                                        <include name="*/node.exe" />
                                     </patternset>
                                     <flattenmapper />
                                 </unzip>
-                                <zip destfile="${project.build.directory}/windows.zip">
-                                    <zipfileset dir="${project.build.directory}/windows"
-                                        filemode="444" />
-                                </zip>
                             </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/linux.xml</descriptor>
+                        <descriptor>src/assembly/macos.xml</descriptor>
+                        <descriptor>src/assembly/windows.xml</descriptor>
+                    </descriptors>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>attach-artifacts</id>
+                        <id>package</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>attach-artifact</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${project.build.directory}/linux.zip</file>
-                                    <type>zip</type>
-                                    <classifier>linux</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${project.build.directory}/macos.zip</file>
-                                    <type>zip</type>
-                                    <classifier>macos</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${project.build.directory}/windows.zip</file>
-                                    <type>zip</type>
-                                    <classifier>windows</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
