@@ -22,46 +22,30 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>get-linux</id>
+                        <id>download</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>wget</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
-                            <url>${chromium.source.url}/Linux_x64%2F${chromium.position}%2Fchromedriver_linux64.zip?alt=media</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFileName>chromedriver_linux64.zip</outputFileName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>get-macos</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>${chromium.source.url}/Mac%2F${chromium.position}%2Fchromedriver_mac64.zip?alt=media</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFileName>chromedriver_mac64.zip</outputFileName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>get-windows</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>${chromium.source.url}/Win_x64%2F${chromium.position}%2Fchromedriver_win32.zip?alt=media</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <outputFileName>chromedriver_win32.zip</outputFileName>
+                            <target>
+                                <get src="${chromium.source.url}/Linux_x64%2F${chromium.position}%2Fchromedriver_linux64.zip?alt=media"
+                                    dest="${project.build.directory}/linux64.zip" />
+                                <unzip src="${project.build.directory}/linux64.zip"
+                                    dest="${project.build.directory}" />
+                                <get src="${chromium.source.url}/Mac%2F${chromium.position}%2Fchromedriver_mac64.zip?alt=media"
+                                    dest="${project.build.directory}/mac64.zip" />
+                                <unzip src="${project.build.directory}/mac64.zip"
+                                    dest="${project.build.directory}" />
+                                <get src="${chromium.source.url}/Win_x64%2F${chromium.position}%2Fchromedriver_win32.zip?alt=media"
+                                    dest="${project.build.directory}/win32.zip" />
+                                <unzip src="${project.build.directory}/win32.zip"
+                                    dest="${project.build.directory}" />
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
