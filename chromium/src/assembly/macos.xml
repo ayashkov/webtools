@@ -17,16 +17,16 @@
             <fileMode>0444</fileMode>
             <directoryMode>0755</directoryMode>
             <excludes>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Chromium Framework</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper (GPU).app/Contents/MacOS/Chromium Helper (GPU)</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper (Plugin).app/Contents/MacOS/Chromium Helper (Plugin)</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper (Renderer).app/Contents/MacOS/Chromium Helper (Renderer)</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper.app/Contents/MacOS/Chromium Helper</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/app_mode_loader</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/chrome_crashpad_handler</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Internet Plug-Ins/nacl_irt_x86_64.nexe</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Resources/install.sh</exclude>
-                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/XPCServices/AlertNotificationService.xpc/Contents/MacOS/AlertNotificationService</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Chromium Framework</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper (GPU).app/Contents/MacOS/Chromium Helper (GPU)</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper (Plugin).app/Contents/MacOS/Chromium Helper (Plugin)</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper (Renderer).app/Contents/MacOS/Chromium Helper (Renderer)</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper.app/Contents/MacOS/Chromium Helper</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/app_mode_loader</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/chrome_crashpad_handler</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Internet Plug-Ins/nacl_irt_x86_64.nexe</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Resources/install.sh</exclude>
+                <exclude>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/XPCServices/AlertNotificationService.xpc/Contents/MacOS/AlertNotificationService</exclude>
                 <exclude>Chromium.app/Contents/MacOS/Chromium</exclude>
             </excludes>
         </fileSet>
@@ -36,16 +36,16 @@
             <fileMode>0555</fileMode>
             <directoryMode>0755</directoryMode>
             <includes>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Chromium Framework</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper (GPU).app/Contents/MacOS/Chromium Helper (GPU)</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper (Plugin).app/Contents/MacOS/Chromium Helper (Plugin)</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper (Renderer).app/Contents/MacOS/Chromium Helper (Renderer)</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/Chromium Helper.app/Contents/MacOS/Chromium Helper</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/app_mode_loader</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Helpers/chrome_crashpad_handler</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Internet Plug-Ins/nacl_irt_x86_64.nexe</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/Resources/install.sh</include>
-                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/79.0.3945.0/XPCServices/AlertNotificationService.xpc/Contents/MacOS/AlertNotificationService</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Chromium Framework</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper (GPU).app/Contents/MacOS/Chromium Helper (GPU)</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper (Plugin).app/Contents/MacOS/Chromium Helper (Plugin)</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper (Renderer).app/Contents/MacOS/Chromium Helper (Renderer)</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/Chromium Helper.app/Contents/MacOS/Chromium Helper</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/app_mode_loader</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Helpers/chrome_crashpad_handler</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Internet Plug-Ins/nacl_irt_x86_64.nexe</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/Resources/install.sh</include>
+                <include>Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/*/XPCServices/AlertNotificationService.xpc/Contents/MacOS/AlertNotificationService</include>
                 <include>Chromium.app/Contents/MacOS/Chromium</include>
             </includes>
         </fileSet>
