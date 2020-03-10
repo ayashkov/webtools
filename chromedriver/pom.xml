@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
     <name>Google Chrome Driver Package</name>
     <properties>
-        <chromium.version>81.0.4044.43</chromium.version>
+        <chromium.version>81.0.4044.0</chromium.version>
         <chromium.position>737173</chromium.position>
         <chromium.source.url>https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o</chromium.source.url>
     </properties>
