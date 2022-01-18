@@ -15,7 +15,7 @@
     <name>NPM Package</name>
 
     <properties>
-        <npm.version>6.13.4</npm.version>
+        <npm.version>8.3.1</npm.version>
         <npm.source.url>https://registry.npmjs.org/npm/-</npm.source.url>
     </properties>
 

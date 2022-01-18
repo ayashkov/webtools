@@ -15,7 +15,7 @@
     <name>Node.js Package</name>
 
     <properties>
-        <nodejs.version>12.16.1</nodejs.version>
+        <nodejs.version>16.13.2</nodejs.version>
         <nodejs.source.url>https://nodejs.org/dist</nodejs.source.url>
     </properties>
 
